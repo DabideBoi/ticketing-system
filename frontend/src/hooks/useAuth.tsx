@@ -20,9 +20,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // One-time client-only hydration from localStorage (window is unavailable during SSR,
+    // so this can't be computed at render time as an initial state value).
     const token = getToken();
     const storedUser = window.localStorage.getItem(USER_KEY);
     if (token && storedUser) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-only hydration, not derived render state
       setUser(JSON.parse(storedUser) as User);
     }
     setIsLoading(false);

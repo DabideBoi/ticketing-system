@@ -7,6 +7,7 @@ import type {
   TicketType,
   User,
 } from "./types";
+import type { ActivityItem } from "./activity";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
 const TOKEN_KEY = "ticketing_token";
@@ -124,6 +125,10 @@ export function updateTicketStatus(id: string, status: string) {
 
 export function getDashboardStats() {
   return apiFetch<DashboardStats>("/api/dashboard/stats");
+}
+
+export function getDashboardActivity() {
+  return apiFetch<ActivityItem[]>("/api/dashboard/activity");
 }
 
 export function getReportingSummary() {
