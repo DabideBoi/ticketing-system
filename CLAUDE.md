@@ -2,6 +2,11 @@
 
 ## Build and Run Instructions
 
+### Quick start (everything at once)
+- **Run db + backend + frontend together:** `./scripts/dev.sh` — starts Postgres via docker compose, waits for it to be healthy, then runs the backend (`prod` profile) and frontend dev server. Ctrl+C stops the backend/frontend (Postgres keeps running; stop it separately with `docker compose down`).
+- **Skip Postgres** (backend falls back to in-memory H2 `dev` profile): `SKIP_DB=1 ./scripts/dev.sh`
+- **If `docker` needs sudo:** `DOCKER_CMD="sudo docker" ./scripts/dev.sh`
+
 ### Database (PostgreSQL via Docker)
 - **Start Postgres:** `docker compose up -d postgres` (uses `docker-compose.yml` at repo root; reads `DB_NAME`/`DB_USERNAME`/`DB_PASSWORD` from `.env`, copy `.env.example` if you don't have one).
 - **Stop:** `docker compose down` (add `-v` to also wipe the data volume).
