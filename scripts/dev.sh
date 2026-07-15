@@ -8,6 +8,13 @@
 #   DOCKER_CMD="sudo docker"   Use if your docker requires sudo.
 set -euo pipefail
 
+if [ "$(id -u)" -eq 0 ]; then
+  echo "error: don't run this script with sudo — it runs mvn/npm as the invoking user." >&2
+  echo "       If only 'docker' needs sudo on this machine, run instead:" >&2
+  echo "         DOCKER_CMD=\"sudo docker\" $0 \"\$@\"" >&2
+  exit 1
+fi
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
@@ -39,8 +46,15 @@ if [ "$SKIP_DB" != "1" ]; then
   $DOCKER_CMD compose up -d postgres
 
   echo "==> Waiting for Postgres to become healthy..."
+  elapsed=0
   until [ "$($DOCKER_CMD inspect -f '{{.State.Health.Status}}' ticketing-postgres 2>/dev/null)" = "healthy" ]; do
     sleep 1
+    elapsed=$((elapsed + 1))
+    if [ "$elapsed" -ge 60 ]; then
+      echo "error: Postgres did not become healthy within 60s. Check its logs with:" >&2
+      echo "         $DOCKER_CMD compose logs postgres" >&2
+      exit 1
+    fi
   done
   echo "==> Postgres is healthy."
   PROFILE="prod"
