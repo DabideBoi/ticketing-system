@@ -2,6 +2,7 @@ package com.ticketing.repository;
 
 import com.ticketing.entity.Ticket;
 import com.ticketing.entity.TicketStatus;
+import com.ticketing.entity.TicketType;
 import com.ticketing.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -14,4 +15,7 @@ public interface TicketRepository extends JpaRepository<Ticket, UUID> {
     List<Ticket> findByStatusIn(List<TicketStatus> statuses);
     List<Ticket> findByAssigneeAndStatusIn(User assignee, List<TicketStatus> statuses);
     long countByStatus(TicketStatus status);
+    long countByType(TicketType type);
+    long countByRequestorAndStatusNot(User requestor, TicketStatus status);
+    long countByAssigneeAndStatus(User assignee, TicketStatus status);
 }
