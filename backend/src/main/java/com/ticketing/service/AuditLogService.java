@@ -1,5 +1,6 @@
 package com.ticketing.service;
 
+import com.ticketing.dto.ActivityItemResponse;
 import com.ticketing.dto.AuditLogResponse;
 import com.ticketing.entity.AuditLog;
 import com.ticketing.entity.Ticket;
@@ -32,6 +33,15 @@ public class AuditLogService {
     public List<AuditLogResponse> getTrail(Ticket ticket) {
         return auditLogRepository.findByTicketOrderByTimestampAsc(ticket).stream()
                 .map(AuditLogResponse::fromEntity)
+                .toList();
+    }
+
+    public List<ActivityItemResponse> getRecentActivity(List<Ticket> tickets) {
+        if (tickets.isEmpty()) {
+            return List.of();
+        }
+        return auditLogRepository.findTop15ByTicketInOrderByTimestampDesc(tickets).stream()
+                .map(ActivityItemResponse::fromEntity)
                 .toList();
     }
 }

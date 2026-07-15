@@ -59,7 +59,11 @@ public class TicketService {
     }
 
     public List<TicketResponse> getTicketsForUser(User user) {
-        List<Ticket> tickets = switch (user.getRole()) {
+        return getScopedTickets(user).stream().map(t -> toResponse(t, false)).toList();
+    }
+
+    public List<Ticket> getScopedTickets(User user) {
+        return switch (user.getRole()) {
             case REQUESTOR -> ticketRepository.findByRequestor(user);
             case APPROVER -> ticketRepository.findByStatus(TicketStatus.FOR_APPROVAL);
             case ASSIGNER -> ticketRepository.findByStatus(TicketStatus.FOR_ASSIGNMENT);
@@ -67,7 +71,6 @@ public class TicketService {
                     user, List.of(TicketStatus.ASSIGNED, TicketStatus.ONGOING));
             case ADMIN -> ticketRepository.findAll();
         };
-        return tickets.stream().map(t -> toResponse(t, false)).toList();
     }
 
     public TicketResponse getTicketById(UUID id) {
