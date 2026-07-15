@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#efece6;font-family:'Kalam',system-ui,sans-serif}
+  .dv-turn{padding:44px 48px 36px;border-bottom:1px solid rgba(0,0,0,.09);scroll-margin-top:16px}
+  .dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 6px}
+  .dv-tid{font:700 10px 'Space Mono',monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+  .dv-tname{font:700 14px/1.2 'Kalam',sans-serif;color:#1a1a1a}
+  .dv-tsub{margin:0 0 24px;font:400 13px/1.4 'Kalam',sans-serif;color:rgba(0,0,0,.5);max-width:760px}
+  .dv-opts{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+  .dv-opt{flex:none;display:flex;flex-direction:column;gap:11px;scroll-margin-top:16px}
+  .dv-oid{font:700 10.5px 'Space Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.09);color:#1a1a1a;border-radius:5px;text-decoration:none}
+  .dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 12px/1.35 'Kalam',sans-serif;color:rgba(0,0,0,.6);max-width:380px}
+  .dv-olabel b{color:#1a1a1a;font-weight:700}
+  .dv-opt:target .dv-oid{background:#2a78d6;color:#fff}
+  .dv-next{margin:26px 0 0;font:400 13px/1.7 'Kalam',sans-serif;color:rgba(0,0,0,.55);max-width:820px}
+  .dv-next a{color:#2a78d6}
+  .wf{width:380px;background:#fff;border:2px solid #1a1a1a;border-radius:12px;box-shadow:5px 6px 0 rgba(26,26,26,.13);overflow:hidden}
+  .wf-cap{font:700 11px 'Space Mono',monospace;color:#1a1a1a;letter-spacing:.02em;margin:2px 2px -2px;display:flex;align-items:center;gap:7px}
+  .wf-cap span{font:400 10px 'Space Mono',monospace;color:rgba(0,0,0,.4)}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t1">
+  <div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Three directions — how status &amp; flow are visualized</span></div>
+  <p class="dv-tsub">Low-fi structural wireframes, Admin as the primary lens, responsive IT/ops tool. Each column is one cohesive product direction shown through its 3 most differentiating frames: <b>Dashboard</b> · <b>Create Request</b> (with DB&nbsp;Fix approval branching) · <b>Ticket Detail + Audit</b>. Same feature set, different mental model for status. Statuses: Open · For&nbsp;Approval · For&nbsp;Assignment · Assigned · Ongoing · For&nbsp;Close · Close.</p>
+
+  <div class="dv-opts">
+
+    <!-- =================== OPTION 1a : PIPELINE =================== -->
+    <div class="dv-opt" id="1a">
+      <div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a><span><b>Pipeline / Stepper.</b> Status = a horizontal funnel. Dense table for scanning volume. Best for ops teams that live in a queue.</span></div>
+
+      <!-- 1a dashboard -->
+      <div class="wf-cap">◱ ADMIN DASHBOARD</div>
+      <div class="wf">
+        <div style="display:flex;height:100%">
+          <!-- sidebar -->
+          <div style="width:58px;border-right:2px dashed rgba(0,0,0,.22);padding:12px 0;display:flex;flex-direction:column;gap:14px;align-items:center;background:#faf9f6">
+            <div style="width:26px;height:26px;border:2px solid #1a1a1a;border-radius:7px"></div>
+            <div style="width:24px;height:8px;background:#2a78d6;border-radius:3px"></div>
+            <div style="width:24px;height:8px;background:#e2e0da;border-radius:3px"></div>
+            <div style="width:24px;height:8px;background:#e2e0da;border-radius:3px"></div>
+            <div style="width:24px;height:8px;background:#e2e0da;border-radius:3px"></div>
+            <div style="width:24px;height:8px;background:#e2e0da;border-radius:3px"></div>
+          </div>
+          <div style="flex:1;padding:12px 13px 15px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px">
+              <div style="font-weight:700;font-size:13px">Admin · All Tickets</div>
+              <div style="display:flex;gap:5px;align-items:center"><div style="width:52px;height:20px;background:#2a78d6;border-radius:6px"></div><div style="width:20px;height:20px;border:2px solid #1a1a1a;border-radius:50%"></div></div>
+            </div>
+            <!-- pipeline funnel -->
+            <div style="font:700 8.5px 'Space Mono',monospace;color:rgba(0,0,0,.4);margin-bottom:5px">STATUS PIPELINE</div>
+            <div style="display:flex;gap:3px;margin-bottom:12px">
+              <div style="flex:1.4;background:#dbe9fb;border:1.5px solid #2a78d6;border-radius:5px;padding:6px 4px;text-align:center"><div style="font-weight:700;font-size:13px;color:#2a78d6">24</div><div style="font-size:7.5px;color:rgba(0,0,0,.55)">Open</div></div>
+              <div style="flex:1;background:#f3f1ec;border:1.5px solid rgba(0,0,0,.28);border-radius:5px;padding:6px 4px;text-align:center"><div style="font-weight:700;font-size:13px">7</div><div style="font-size:7px;color:rgba(0,0,0,.55)">Approval</div></div>
+              <div style="flex:1;background:#f3f1ec;border:1.5px solid rgba(0,0,0,.28);border-radius:5px;padding:6px 4px;text-align:center"><div style="font-weight:700;font-size:13px">5</div><div style="font-size:7px;color:rgba(0,0,0,.55)">Assign</div></div>
+              <div style="flex:1;background:#f3f1ec;border:1.5px solid rgba(0,0,0,.28);border-radius:5px;padding:6px 4px;text-align:center"><div style="font-weight:700;font-size:13px">18</div><div style="font-size:7px;color:rgba(0,0,0,.55)">Ongoing</div></div>
+              <div style="flex:1;background:#f3f1ec;border:1.5px solid rgba(0,0,0,.28);border-radius:5px;padding:6px 4px;text-align:center"><div style="font-weight:700;font-size:13px">9</div><div style="font-size:7px;color:rgba(0,0,0,.55)">Close</div></div>
+            </div>
+            <!-- table -->
+            <div style="border:1.5px solid rgba(0,0,0,.28);border-radius:7px;overflow:hidden">
+              <div style="display:flex;gap:6px;padding:6px 8px;background:#f3f1ec;border-bottom:1.5px solid rgba(0,0,0,.2);font:700 7.5px 'Space Mono',monospace;color:rgba(0,0,0,.5)"><div style="width:34px">ID</div><div style="flex:1">TITLE</div><div style="width:46px">TYPE</div><div style="width:70px">STATUS</div></div>
+              <div style="display:flex;gap:6px;padding:7px 8px;border-bottom:1px dashed rgba(0,0,0,.15);align-items:center;font-size:9px"><div style="width:34px;color:rgba(0,0,0,.5)">#1042</div><div style="flex:1;height:7px;background:#e7e5e0;border-radius:3px"></div><div style="width:46px;font-size:7px;background:#efe6ff;border:1px solid #b9a6e0;border-radius:4px;text-align:center;padding:1px">DB Fix</div><div style="width:70px"><div style="height:6px;width:60%;background:#2a78d6;border-radius:3px"></div></div></div>
+              <div style="display:flex;gap:6px;padding:7px 8px;border-bottom:1px dashed rgba(0,0,0,.15);align-items:center;font-size:9px"><div style="width:34px;color:rgba(0,0,0,.5)">#1041</div><div style="flex:1;height:7px;background:#e7e5e0;border-radius:3px"></div><div style="width:46px;font-size:7px;background:#e2f0e6;border:1px solid #7bbf95;border-radius:4px;text-align:center;padding:1px">Service</div><div style="width:70px"><div style="height:6px;width:90%;background:#7bbf95;border-radius:3px"></div></div></div>
+              <div style="display:flex;gap:6px;padding:7px 8px;border-bottom:1px dashed rgba(0,0,0,.15);align-items:center;font-size:9px"><div style="width:34px;color:rgba(0,0,0,.5)">#1039</div><div style="flex:1;height:7px;background:#e7e5e0;border-radius:3px"></div><div style="width:46px;font-size:7px;background:#fde8e4;border:1px solid #e0a196;border-radius:4px;text-align:center;padding:1px">Incident</div><div style="width:70px"><div style="height:6px;width:40%;background:#e0a196;border-radius:3px"></div></div></div>
+              <div style="display:flex;gap:6px;padding:7px 8px;align-items:center;font-size:9px"><div style="width:34px;color:rgba(0,0,0,.5)">#1036</div><div style="flex:1;height:7px;background:#e7e5e0;border-radius:3px"></div><div style="width:46px;font-size:7px;background:#eef2ff;border:1px solid #9db0e0;border-radius:4px;text-align:center;padding:1px">MASS</div><div style="width:70px"><div style="height:6px;width:100%;background:#d7d4cd;border-radius:3px"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1a create -->
+      <div class="wf-cap">◱ CREATE REQUEST <span>· DB Fix → approval</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:10px">New Request</div>
+        <div style="font:700 8px 'Space Mono',monospace;color:rgba(0,0,0,.4);margin-bottom:4px">TICKET TYPE</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px">
+          <div style="font-size:8.5px;background:#dbe9fb;border:1.5px solid #2a78d6;border-radius:14px;padding:3px 8px;color:#2a78d6;font-weight:700">DB Fix ✓</div>
+          <div style="font-size:8.5px;border:1.5px solid rgba(0,0,0,.28);border-radius:14px;padding:3px 8px">Service</div>
+          <div style="font-size:8.5px;border:1.5px solid rgba(0,0,0,.28);border-radius:14px;padding:3px 8px">MASS</div>
+          <div style="font-size:8.5px;border:1.5px solid rgba(0,0,0,.28);border-radius:14px;padding:3px 8px">BCP</div>
+          <div style="font-size:8.5px;border:1.5px solid rgba(0,0,0,.28);border-radius:14px;padding:3px 8px">Incident</div>
+        </div>
+        <div style="height:9px;width:35%;background:#efe6ff;border-radius:3px;margin-bottom:6px"></div>
+        <div style="height:26px;border:1.5px solid rgba(0,0,0,.28);border-radius:6px;margin-bottom:9px"></div>
+        <div style="height:9px;width:28%;background:#e7e5e0;border-radius:3px;margin-bottom:6px"></div>
+        <div style="height:48px;border:1.5px solid rgba(0,0,0,.28);border-radius:6px;margin-bottom:11px"></div>
+        <!-- conditional callout -->
+        <div style="display:flex;gap:7px;align-items:flex-start;background:#fff7 e6;background:#fdf6e3;border:1.5px dashed #d9b64e;border-radius:7px;padding:8px 9px;margin-bottom:11px">
+          <div style="width:14px;height:14px;border:2px solid #b9902a;border-radius:50%;flex:none;font-size:9px;text-align:center;color:#b9902a;font-weight:700;line-height:12px">!</div>
+          <div style="font-size:9px;color:#7a5f16;line-height:1.35">This type needs <b>approval</b> → routes to Approver, then Assigner picks an assignee.</div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:6px"><div style="width:54px;height:24px;border:1.5px solid #1a1a1a;border-radius:6px"></div><div style="width:74px;height:24px;background:#2a78d6;border-radius:6px"></div></div>
+      </div>
+
+      <!-- 1a detail -->
+      <div class="wf-cap">◱ TICKET DETAIL <span>· stepper + audit</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-weight:700;font-size:12px">#1042 · DB Fix</div><div style="font-size:8px;background:#dbe9fb;border:1.5px solid #2a78d6;border-radius:12px;padding:2px 9px;color:#2a78d6;font-weight:700">Ongoing</div></div>
+        <!-- horizontal stepper -->
+        <div style="display:flex;align-items:center;margin-bottom:13px">
+          <div style="width:15px;height:15px;border-radius:50%;background:#7bbf95;border:2px solid #4f9d6c"></div><div style="flex:1;height:2.5px;background:#7bbf95"></div>
+          <div style="width:15px;height:15px;border-radius:50%;background:#7bbf95;border:2px solid #4f9d6c"></div><div style="flex:1;height:2.5px;background:#7bbf95"></div>
+          <div style="width:15px;height:15px;border-radius:50%;background:#7bbf95;border:2px solid #4f9d6c"></div><div style="flex:1;height:2.5px;background:#2a78d6"></div>
+          <div style="width:17px;height:17px;border-radius:50%;background:#2a78d6;border:2px solid #1c5bb0"></div><div style="flex:1;height:2.5px;background:#d7d4cd"></div>
+          <div style="width:15px;height:15px;border-radius:50%;background:#e7e5e0;border:2px solid rgba(0,0,0,.25)"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font:400 6.5px 'Space Mono',monospace;color:rgba(0,0,0,.45);margin:-8px 0 12px"><span>Appr</span><span>Assign</span><span>Assigned</span><span>Ongoing</span><span>Close</span></div>
+        <div style="font:700 8px 'Space Mono',monospace;color:rgba(0,0,0,.4);margin-bottom:5px">AUDIT TRAIL</div>
+        <div style="border-left:2px solid rgba(0,0,0,.2);padding-left:9px;display:flex;flex-direction:column;gap:8px">
+          <div><div style="height:6px;width:80%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.4)">Approved by J. Cruz · 2h ago</div></div>
+          <div><div style="height:6px;width:65%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.4)">Assigned to M. Reyes · 1h ago</div></div>
+          <div><div style="height:6px;width:72%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.4)">Status → Ongoing · 40m ago</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== OPTION 1b : STATUS LANES =================== -->
+    <div class="dv-opt" id="1b">
+      <div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a><span><b>Status Lanes (Kanban).</b> Each status is a column; tickets move left→right. Flow is spatial &amp; draggable. Best for seeing where work is stuck.</span></div>
+
+      <!-- 1b dashboard -->
+      <div class="wf-cap">◱ ADMIN DASHBOARD</div>
+      <div class="wf">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:2px dashed rgba(0,0,0,.22)">
+          <div style="display:flex;gap:9px;align-items:center"><div style="width:22px;height:22px;border:2px solid #1a1a1a;border-radius:7px"></div><div style="font-weight:700;font-size:12px">Board · All Tickets</div></div>
+          <div style="display:flex;gap:5px"><div style="width:46px;height:19px;border:1.5px solid #1a1a1a;border-radius:6px"></div><div style="width:46px;height:19px;background:#2a78d6;border-radius:6px"></div></div>
+        </div>
+        <div style="display:flex;gap:7px;padding:11px 12px;overflow:hidden">
+          <!-- lane -->
+          <div style="flex:1;background:#f5f3ee;border-radius:7px;padding:6px 5px">
+            <div style="font:700 7.5px 'Space Mono',monospace;color:#2a78d6;margin-bottom:6px">OPEN · 24</div>
+            <div style="background:#fff;border:1.5px solid #2a78d6;border-radius:6px;padding:6px;margin-bottom:5px;box-shadow:2px 2px 0 rgba(42,120,214,.18)"><div style="height:6px;width:90%;background:#e7e5e0;border-radius:3px;margin-bottom:4px"></div><div style="font-size:6.5px;color:rgba(0,0,0,.45)">#1042 DB Fix</div></div>
+            <div style="background:#fff;border:1.5px solid rgba(0,0,0,.25);border-radius:6px;padding:6px"><div style="height:6px;width:70%;background:#e7e5e0;border-radius:3px;margin-bottom:4px"></div><div style="font-size:6.5px;color:rgba(0,0,0,.45)">#1040 Service</div></div>
+          </div>
+          <div style="flex:1;background:#f5f3ee;border-radius:7px;padding:6px 5px">
+            <div style="font:700 7.5px 'Space Mono',monospace;color:rgba(0,0,0,.5);margin-bottom:6px">APPROVAL · 7</div>
+            <div style="background:#fff;border:1.5px solid #d9b64e;border-radius:6px;padding:6px;box-shadow:2px 2px 0 rgba(217,182,78,.22)"><div style="height:6px;width:80%;background:#efe6ff;border-radius:3px;margin-bottom:4px"></div><div style="font-size:6.5px;color:rgba(0,0,0,.45)">#1044 DB Fix ⏳</div></div>
+          </div>
+          <div style="flex:1;background:#f5f3ee;border-radius:7px;padding:6px 5px">
+            <div style="font:700 7.5px 'Space Mono',monospace;color:rgba(0,0,0,.5);margin-bottom:6px">ONGOING · 18</div>
+            <div style="background:#fff;border:1.5px solid rgba(0,0,0,.25);border-radius:6px;padding:6px;margin-bottom:5px"><div style="height:6px;width:85%;background:#e7e5e0;border-radius:3px;margin-bottom:4px"></div><div style="font-size:6.5px;color:rgba(0,0,0,.45)">#1039 Incident</div></div>
+            <div style="background:#fff;border:1.5px solid rgba(0,0,0,.25);border-radius:6px;padding:6px"><div style="height:6px;width:60%;background:#e7e5e0;border-radius:3px;margin-bottom:4px"></div><div style="font-size:6.5px;color:rgba(0,0,0,.45)">#1031 MASS</div></div>
+          </div>
+          <div style="flex:.6;background:#f5f3ee;border-radius:7px;padding:6px 5px;opacity:.6">
+            <div style="font:700 7px 'Space Mono',monospace;color:rgba(0,0,0,.5);margin-bottom:6px">CLOSE</div>
+            <div style="background:#fff;border:1.5px solid rgba(0,0,0,.2);border-radius:6px;padding:5px"><div style="height:6px;width:80%;background:#d7d4cd;border-radius:3px"></div></div>
+          </div>
+        </div>
+        <div style="padding:0 12px 11px;font:400 8px 'Space Mono',monospace;color:rgba(0,0,0,.35)">↔ drag card to change status · admin can reassign inline</div>
+      </div>
+
+      <!-- 1b create -->
+      <div class="wf-cap">◱ CREATE REQUEST <span>· wizard steps</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:11px">New Request</div>
+        <div style="display:flex;gap:5px;align-items:center;margin-bottom:13px">
+          <div style="width:18px;height:18px;border-radius:50%;background:#2a78d6;color:#fff;font-size:9px;font-weight:700;text-align:center;line-height:18px">1</div><div style="flex:1;height:2px;background:#2a78d6"></div>
+          <div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.3);font-size:9px;text-align:center;line-height:16px;color:rgba(0,0,0,.4)">2</div><div style="flex:1;height:2px;background:#d7d4cd"></div>
+          <div style="width:18px;height:18px;border-radius:50%;border:2px solid rgba(0,0,0,.3);font-size:9px;text-align:center;line-height:16px;color:rgba(0,0,0,.4)">3</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font:400 7px 'Space Mono',monospace;color:rgba(0,0,0,.45);margin:-9px 0 14px"><span>Type</span><span>Details</span><span>Review</span></div>
+        <div style="font:700 8px 'Space Mono',monospace;color:rgba(0,0,0,.4);margin-bottom:7px">STEP 1 · CHOOSE TYPE</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          <div style="border:1.5px solid #2a78d6;background:#dbe9fb;border-radius:7px;padding:9px 8px"><div style="font-size:9.5px;font-weight:700;color:#2a78d6">DB Fix ✓</div><div style="font-size:7px;color:rgba(0,0,0,.5)">needs approval</div></div>
+          <div style="border:1.5px solid rgba(0,0,0,.28);border-radius:7px;padding:9px 8px"><div style="font-size:9.5px;font-weight:700">Service Req</div><div style="font-size:7px;color:rgba(0,0,0,.5)">→ assigner</div></div>
+          <div style="border:1.5px solid rgba(0,0,0,.28);border-radius:7px;padding:9px 8px"><div style="font-size:9.5px;font-weight:700">MASS Users</div><div style="font-size:7px;color:rgba(0,0,0,.5)">→ assigner</div></div>
+          <div style="border:1.5px solid rgba(0,0,0,.28);border-radius:7px;padding:9px 8px"><div style="font-size:9.5px;font-weight:700">BCP Users</div><div style="font-size:7px;color:rgba(0,0,0,.5)">→ assigner</div></div>
+        </div>
+        <div style="border:1.5px solid rgba(0,0,0,.28);border-radius:7px;padding:9px 8px;margin-top:6px"><div style="font-size:9.5px;font-weight:700">Incident Report</div><div style="font-size:7px;color:rgba(0,0,0,.5)">→ assigner</div></div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px"><div style="width:64px;height:24px;background:#2a78d6;border-radius:6px"></div></div>
+      </div>
+
+      <!-- 1b detail -->
+      <div class="wf-cap">◱ TICKET DETAIL <span>· lane context</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px"><div style="font-weight:700;font-size:12px">#1044 · DB Fix</div><div style="font-size:8px;background:#fdf6e3;border:1.5px solid #d9b64e;border-radius:12px;padding:2px 9px;color:#7a5f16;font-weight:700">For Approval</div></div>
+        <!-- mini lane strip showing current position -->
+        <div style="display:flex;gap:3px;margin-bottom:13px">
+          <div style="flex:1;height:20px;background:#7bbf95;border-radius:4px 0 0 4px;position:relative"></div>
+          <div style="flex:1;height:20px;background:#2a78d6;border:2px solid #1c5bb0;box-sizing:border-box"></div>
+          <div style="flex:1;height:20px;background:#e7e5e0"></div>
+          <div style="flex:1;height:20px;background:#e7e5e0"></div>
+          <div style="flex:1;height:20px;background:#e7e5e0;border-radius:0 4px 4px 0"></div>
+        </div>
+        <div style="display:flex;gap:7px;margin-bottom:13px"><div style="flex:1;height:26px;background:#e2f0e6;border:1.5px solid #7bbf95;border-radius:6px;font-size:8.5px;color:#3f7a56;font-weight:700;text-align:center;line-height:24px">✓ Approve</div><div style="flex:1;height:26px;border:1.5px solid #e0a196;border-radius:6px;font-size:8.5px;color:#a5564a;font-weight:700;text-align:center;line-height:24px">✕ Reject</div></div>
+        <div style="font:700 8px 'Space Mono',monospace;color:rgba(0,0,0,.4);margin-bottom:5px">AUDIT TRAIL</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;gap:6px;font-size:8px"><div style="width:44px;font:400 7px 'Space Mono',monospace;color:rgba(0,0,0,.4)">10:22</div><div style="flex:1;height:6px;background:#e7e5e0;border-radius:3px"></div></div>
+          <div style="display:flex;gap:6px;font-size:8px"><div style="width:44px;font:400 7px 'Space Mono',monospace;color:rgba(0,0,0,.4)">10:18</div><div style="flex:1;height:6px;background:#e7e5e0;border-radius:3px"></div></div>
+          <div style="display:flex;gap:6px;font-size:8px"><div style="width:44px;font:400 7px 'Space Mono',monospace;color:rgba(0,0,0,.4)">09:55</div><div style="flex:1;height:6px;background:#e7e5e0;border-radius:3px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================== OPTION 1c : TIMELINE =================== -->
+    <div class="dv-opt" id="1c">
+      <div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a><span><b>Timeline-first.</b> Every ticket is a story; the audit trail is the hero. Status shown as a vertical progress rail. Best when accountability &amp; history matter most.</span></div>
+
+      <!-- 1c dashboard -->
+      <div class="wf-cap">◱ ADMIN DASHBOARD</div>
+      <div class="wf">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:2px dashed rgba(0,0,0,.22)">
+          <div style="font-weight:700;font-size:12px">Activity · All Tickets</div>
+          <div style="display:flex;gap:6px;align-items:center"><div style="width:70px;height:18px;background:#f3f1ec;border:1.5px solid rgba(0,0,0,.25);border-radius:12px"></div><div style="width:18px;height:18px;border:2px solid #1a1a1a;border-radius:50%"></div></div>
+        </div>
+        <!-- KPI chips -->
+        <div style="display:flex;gap:6px;padding:11px 12px 8px">
+          <div style="flex:1;border:1.5px solid #2a78d6;background:#dbe9fb;border-radius:8px;padding:7px 6px"><div style="font-weight:700;font-size:14px;color:#2a78d6">7</div><div style="font-size:6.5px;color:rgba(0,0,0,.55)">Pending approvals</div></div>
+          <div style="flex:1;border:1.5px solid rgba(0,0,0,.25);border-radius:8px;padding:7px 6px"><div style="font-weight:700;font-size:14px">5</div><div style="font-size:6.5px;color:rgba(0,0,0,.55)">For assignment</div></div>
+          <div style="flex:1;border:1.5px solid rgba(0,0,0,.25);border-radius:8px;padding:7px 6px"><div style="font-weight:700;font-size:14px">18</div><div style="font-size:6.5px;color:rgba(0,0,0,.55)">Ongoing</div></div>
+        </div>
+        <!-- activity feed -->
+        <div style="padding:4px 14px 13px">
+          <div style="border-left:2.5px solid #2a78d6;padding-left:11px;display:flex;flex-direction:column;gap:11px">
+            <div style="position:relative"><div style="position:absolute;left:-16px;top:2px;width:9px;height:9px;border-radius:50%;background:#2a78d6;border:2px solid #fff;box-shadow:0 0 0 1.5px #2a78d6"></div><div style="height:7px;width:85%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.42)">#1044 DB Fix → For Approval · now</div></div>
+            <div style="position:relative"><div style="position:absolute;left:-16px;top:2px;width:9px;height:9px;border-radius:50%;background:#7bbf95;border:2px solid #fff;box-shadow:0 0 0 1.5px #7bbf95"></div><div style="height:7px;width:70%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.42)">#1042 assigned to M. Reyes · 1h</div></div>
+            <div style="position:relative"><div style="position:absolute;left:-16px;top:2px;width:9px;height:9px;border-radius:50%;background:#d7d4cd;border:2px solid #fff;box-shadow:0 0 0 1.5px #b8b4ac"></div><div style="height:7px;width:78%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.42)">#1039 Incident → Ongoing · 2h</div></div>
+            <div style="position:relative"><div style="position:absolute;left:-16px;top:2px;width:9px;height:9px;border-radius:50%;background:#d7d4cd;border:2px solid #fff;box-shadow:0 0 0 1.5px #b8b4ac"></div><div style="height:7px;width:62%;background:#e7e5e0;border-radius:3px;margin-bottom:3px"></div><div style="font-size:7px;color:rgba(0,0,0,.42)">#1031 closed by admin · 3h</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1c create -->
+      <div class="wf-cap">◱ CREATE REQUEST <span>· single scroll</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="font-weight:700;font-size:13px;margin-bottom:11px">New Request</div>
+        <div style="font:700 8px 'Space Mono',monospace;color:rgba(0,0,.4);color:rgba(0,0,0,.4);margin-bottom:6px">TYPE</div>
+        <div style="height:26px;border:1.5px solid #2a78d6;background:#dbe9fb;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:0 9px;margin-bottom:12px"><span style="font-size:9.5px;color:#2a78d6;font-weight:700">DB Fix</span><span style="font-size:9px;color:#2a78d6">▾</span></div>
+        <div style="height:9px;width:32%;background:#e7e5e0;border-radius:3px;margin-bottom:6px"></div>
+        <div style="height:26px;border:1.5px solid rgba(0,0,0,.28);border-radius:6px;margin-bottom:10px"></div>
+        <div style="height:9px;width:24%;background:#e7e5e0;border-radius:3px;margin-bottom:6px"></div>
+        <div style="height:44px;border:1.5px solid rgba(0,0,0,.28);border-radius:6px;margin-bottom:11px"></div>
+        <!-- inline flow preview -->
+        <div style="background:#f5f3ee;border-radius:7px;padding:9px;margin-bottom:11px">
+          <div style="font:700 7px 'Space Mono',monospace;color:rgba(0,0,0,.45);margin-bottom:7px">WHAT HAPPENS NEXT</div>
+          <div style="display:flex;align-items:center;gap:4px;font-size:7.5px;color:rgba(0,0,0,.6)">
+            <span style="background:#fdf6e3;border:1px solid #d9b64e;border-radius:10px;padding:2px 6px">Approver</span><span>→</span>
+            <span style="background:#dbe9fb;border:1px solid #2a78d6;border-radius:10px;padding:2px 6px">Assigner</span><span>→</span>
+            <span style="background:#e2f0e6;border:1px solid #7bbf95;border-radius:10px;padding:2px 6px">Assignee</span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:6px"><div style="width:50px;height:24px;border:1.5px solid #1a1a1a;border-radius:6px"></div><div style="width:70px;height:24px;background:#2a78d6;border-radius:6px"></div></div>
+      </div>
+
+      <!-- 1c detail -->
+      <div class="wf-cap">◱ TICKET DETAIL <span>· audit is the hero</span></div>
+      <div class="wf" style="padding:13px 14px 15px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-weight:700;font-size:12px">#1042 · DB Fix</div><div style="font-size:8px;background:#dbe9fb;border:1.5px solid #2a78d6;border-radius:12px;padding:2px 9px;color:#2a78d6;font-weight:700">Ongoing</div></div>
+        <div style="display:flex;gap:12px">
+          <!-- vertical rail -->
+          <div style="width:14px;display:flex;flex-direction:column;align-items:center;padding-top:2px">
+            <div style="width:11px;height:11px;border-radius:50%;background:#7bbf95"></div><div style="width:2px;flex:1;background:#7bbf95;min-height:14px"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#7bbf95"></div><div style="width:2px;flex:1;background:#7bbf95;min-height:14px"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#7bbf95"></div><div style="width:2px;flex:1;background:#2a78d6;min-height:14px"></div>
+            <div style="width:13px;height:13px;border-radius:50%;background:#2a78d6;border:2px solid #1c5bb0"></div><div style="width:2px;flex:1;background:#d7d4cd;min-height:14px"></div>
+            <div style="width:11px;height:11px;border-radius:50%;background:#e7e5e0;border:1.5px solid rgba(0,0,0,.25)"></div>
+          </div>
+          <!-- entries -->
+          <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+            <div><div style="font-size:9px;font-weight:700;margin-bottom:2px">Submitted</div><div style="font-size:7px;color:rgba(0,0,0,.42)">by R. Tan · Jul 14, 09:40</div></div>
+            <div><div style="font-size:9px;font-weight:700;margin-bottom:2px">Approved</div><div style="font-size:7px;color:rgba(0,0,0,.42)">by J. Cruz · Jul 14, 11:02</div></div>
+            <div><div style="font-size:9px;font-weight:700;margin-bottom:2px">Assigned</div><div style="font-size:7px;color:rgba(0,0,0,.42)">to M. Reyes by K. Lim · 12:15</div></div>
+            <div><div style="font-size:9px;font-weight:700;color:#2a78d6;margin-bottom:2px">Ongoing ●</div><div style="font-size:7px;color:rgba(0,0,0,.42)">started · 12:40</div></div>
+            <div style="opacity:.5"><div style="font-size:9px;font-weight:700;margin-bottom:2px">For Close → Close</div><div style="font-size:7px;color:rgba(0,0,0,.42)">pending</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="dv-next">Try next: "expand <a class="dv-oid" href="#1b">1b</a> into the full screen set — login, approval, assignment, reporting, email" · "combine the <a class="dv-oid" href="#1a">1a</a> dashboard table with <a class="dv-oid" href="#1c">1c</a>'s timeline detail" · "show the mobile / responsive frames for <a class="dv-oid" href="#1c">1c</a>" · "new directions for the dashboard"</p>
+</section>
+</x-dc>
+</body>
+</html>
