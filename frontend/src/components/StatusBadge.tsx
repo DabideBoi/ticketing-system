@@ -14,6 +14,7 @@ const STATUS_STYLES: Record<TicketStatus, string> = {
 export function StatusBadge({ status }: { status: TicketStatus }) {
   return (
     <span
+      data-testid="ticket-status-badge"
       className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${STATUS_STYLES[status]}`}
     >
       {TICKET_STATUS_LABELS[status]}

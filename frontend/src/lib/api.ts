@@ -49,7 +49,7 @@ export async function apiFetch<T>(path: string, options: RequestInit = {}): Prom
     headers,
   });
 
-  if (response.status === 401) {
+  if (response.status === 401 && path !== "/api/auth/login") {
     clearToken();
     if (typeof window !== "undefined" && window.location.pathname !== "/login") {
       window.location.href = "/login";
